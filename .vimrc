@@ -77,6 +77,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 let mapleader = '.'
@@ -86,6 +87,7 @@ nnoremap<leader>m :w<cr>
 nnoremap<leader>p :q<cr>
 nnoremap<leader>r :call GoRun()<cr>
 inoremap kk <esc>
+map <space> viw
 let g:go_gopls_enabled = 0
  "  go syntax-highlighting
 let g:go_highlight_functions = 1
