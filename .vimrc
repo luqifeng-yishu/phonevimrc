@@ -80,12 +80,12 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 call plug#end()
 
-let mapleader = '.'
-let g:mapleader = '.'
+let mapleader = ','
+let g:mapleader = ','
 nnoremap<leader>s :source .vimrc<cr>
 nnoremap<leader>m :w<cr>
-nnoremap<leader>p :q<cr>
-nnoremap<leader>r :call GoRun()<cr>
+nnoremap<leader>u :q<cr>
+" nnoremap<leader>r :call GoRun()<cr>
 inoremap kk <esc>
 map <space> viw
 let g:go_gopls_enabled = 0
@@ -97,13 +97,42 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 " =======self defind function========
-function! GoRun ()
-exec 'w'
-if &filetype == 'go'
-  exec 'GoRun %'
-endif
+map <Leader>r :call RunCode()<cr>
+function! RunCode()
+	exec "w"
+set splitbelow
+	if &filetype == 'python'
+		" :!python3 %
+		" :sp
+		:terminal python3 %
+	elseif &filetype == 'html'
+		silent! exec "!chromium % &"
+	elseif &filetype == 'xml'
+		silent! exec "!chromium % &"
+	elseif &filetype == 'markdown'
+		exec "MarkdownPreview"
+	elseif &filetype == 'cpp'
+		exec "!g++ % -Wall -o ./bin/%<"
+		:sp
+		:terminal ./bin/%<
+	elseif &filetype == 'c'
+		exec "!gcc % -Wall -o ./bin/%<"
+		" !./bin/%<
+		:sp
+		:terminal ./bin/%<
+	elseif &filetype == 'go'
+		" :sp
+		" :terminal go run %
+		:GoRun<CR>
+	elseif &filetype == 'java'
+		exec "!find % -name '*.java' > temp"
+		exec "!javac -cp ../bin -d ../bin/ @temp"
+		exec "!rm temp"
+	elseif &filetype == 'sh'
+		:sp
+		:terminal bash %
+	endif
 endfunction
-
 colorscheme space-vim-dark
 hi Normal     ctermbg=NONE guibg=NONE
 hi LineNr     ctermbg=NONE guibg=NONE
