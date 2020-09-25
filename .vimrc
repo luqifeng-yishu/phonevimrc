@@ -78,13 +78,14 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
+Plug 'tell-k/vim-autopep8'
 call plug#end()
 
 let mapleader = ','
 let g:mapleader = ','
 nnoremap<leader>s :source .vimrc<cr>
-nnoremap<leader>m :w<cr>
-nnoremap<leader>u :q<cr>
+nnoremap mm :w<cr>
+nnoremap<leader>. :q<cr>
 " nnoremap<leader>r :call GoRun()<cr>
 inoremap kk <esc>
 map <space> viw
@@ -97,7 +98,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 " =======self defind function========
-map <Leader>r :call RunCode()<cr>
+map <Leader>g :call RunCode()<cr>
 function! RunCode()
 	exec "w"
 set splitbelow
